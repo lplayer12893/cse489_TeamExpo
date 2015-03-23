@@ -11,7 +11,7 @@ end
 
 for j = 1:size(centroid)
 	for k = 1:length(centroid)
-		if(centroid(j,k) >= (3 - nVarargs)) % if 2 images have the same white value, it is white in the centroid
+		if(centroid(j,k) >= (1 - nVarargs)) % if images have the same white value, it is white in the centroid
 			centroid(j,k) = 1;
 		else
 			centroid(j,k) = -1;
