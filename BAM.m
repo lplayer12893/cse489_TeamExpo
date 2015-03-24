@@ -83,8 +83,11 @@ function [outX, outY] = BAM(inputX, inputY)
 	Ysub = 			[-1 -1 -1 -1 -1 1 -1];
 	Ywhale = 		[-1 -1 -1 -1 -1 -1 1];
 
-	Xstored = [Xbear; Xelephant; Xfighter; Xpassenger; Xship; Xsub; Xwhale];
-	Ystored = [Ybear; Yelephant; Yfighter; Ypassenger; Yship; Ysub; Ywhale];
+	% Xstored = [Xbear; Xelephant; Xfighter; Xpassenger; Xship; Xsub; Xwhale];
+	% Ystored = [Ybear; Yelephant; Yfighter; Ypassenger; Yship; Ysub; Ywhale];
+
+	Xstored = [Xbear; Xelephant];
+	Ystored = [Ybear; Yelephant];
 
 	% Weight Matrix Calculation
 	W = CalcWeight(Xstored, Ystored);
@@ -112,6 +115,8 @@ function [outX, outY] = BAM(inputX, inputY)
 	% Convert the 1D vector baack into the matrix representing the image
 	outX = reshape(actX, [768, 1024]);
 	outY = actY;
+
+	imshow(outX);
 
 end
 
