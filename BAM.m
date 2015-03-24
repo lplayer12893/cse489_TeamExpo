@@ -1,4 +1,8 @@
 function [outX, outY] = BAM(inputX, inputY)
+
+	% Turn the input image into a 1D vector
+	inputX = reshape(inputX, [1, 786432]);
+
 	% Stored Vectors
     bear1 = createMatrix('project_photo\bear1.jpeg');
     bear2 = createMatrix('project_photo\bear2.jpeg');
@@ -52,7 +56,7 @@ function [outX, outY] = BAM(inputX, inputY)
     sub5 = createMatrix('project_photo\sub5.jpg');
     sub6 = createMatrix('project_photo\sub6.jpg');
     sub7 = createMatrix('project_photo\sub7.jpg');
-    sub8 = createMatrix('project_photo\sub8.jpg');
+    % sub8 = createMatrix('project_photo\sub8.jpg');
 
     whale1 = createMatrix('project_photo\whale1.jpg');
     whale2 = createMatrix('project_photo\whale2.jpg');
@@ -63,19 +67,24 @@ function [outX, outY] = BAM(inputX, inputY)
     whale7 = createMatrix('project_photo\whale7.jpg');
     whale8 = createMatrix('project_photo\whale8.jpg');
 
-    Xbear = generateCentroid(bear1, bear2, bear3, bear4, bear5, bear7, bear8);
-    Xelephant = generateCentroid(elephant1, elephant2, elephant3, elephant4, elephant5, elephant6, elephant7, elephant8);
-    Xfighter = generateCentroid(fighter1, fighter2, fighter3, fighter4, fighter5, fighter6, fighter7, fighter8);
-    Xpassenger = generateCentroid(passenger1, passenger2, passenger3, passenger4, passenger5, passenger6, passenger7, passenger8);
-    Xship = generateCentroid(ship1, ship2, ship3, ship4, ship5, ship6, ship7, ship8);
-    Xsub = generateCentroid(sub1, sub2, sub3, sub4, sub5, sub6, sub7, sub8);
-    Xwhale = generateCentroid(whale1, whale2, whale3, whale4, whale5, whale6, whale7, whale8);
+    Xbear = reshape(generateCentroid(bear1, bear2, bear3, bear4, bear5, bear7, bear8), [1, 786432]);
+    Xelephant = reshape(generateCentroid(elephant1, elephant2, elephant3, elephant4, elephant5, elephant6, elephant7), [1, 786432]);
+    Xfighter = reshape(generateCentroid(fighter1, fighter2, fighter3, fighter4, fighter5, fighter6, fighter7), [1, 786432]);
+    Xpassenger = reshape(generateCentroid(passenger1, passenger2, passenger3, passenger4, passenger5, passenger6, passenger7), [1, 786432]);
+    Xship = reshape(generateCentroid(ship1, ship2, ship3, ship4, ship5, ship6, ship7), [1, 786432]);
+    Xsub = reshape(generateCentroid(sub1, sub2, sub3, sub4, sub5, sub6, sub7), [1, 786432]);
+    Xwhale = reshape(generateCentroid(whale1, whale2, whale3, whale4, whale5, whale6, whale7), [1, 786432]);
 
-	Ya = [-1 1];
-	Yc = [1 1];
+	Ybear = 		[1 -1 -1 -1 -1 -1 -1];
+	Yelephant = 	[-1 1 -1 -1 -1 -1 -1];
+	Yfighter = 		[-1 -1 1 -1 -1 -1 -1];
+	Ypassenger = 	[-1 -1 -1 1 -1 -1 -1];
+	Yship = 		[-1 -1 -1 -1 1 -1 -1];
+	Ysub = 			[-1 -1 -1 -1 -1 1 -1];
+	Ywhale = 		[-1 -1 -1 -1 -1 -1 1];
 
-	Xstored = [Xa; Xc];
-	Ystored = [Ya; Yc];
+	Xstored = [Xbear; Xelephant; Xfighter; Xpassenger; Xship; Xsub; Xwhale];
+	Ystored = [Ybear; Yelephant; Yfighter; Ypassenger; Yship; Ysub; Ywhale];
 
 	% Weight Matrix Calculation
 	W = CalcWeight(Xstored, Ystored);
@@ -100,8 +109,8 @@ function [outX, outY] = BAM(inputX, inputY)
 		end
 	end
 	
-
-	outX = actX;
+	% Convert the 1D vector baack into the matrix representing the image
+	outX = reshape(actX, [768, 1024]);
 	outY = actY;
 
 end
