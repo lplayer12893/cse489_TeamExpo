@@ -1,10 +1,10 @@
-function A = centroidToVector(m) % m is the input centroid as a matrix
+function A = centroidToVector(cent_mat) % cent_mat is the input centroid as a matrix
 
 result = [];
 
-for i = 1:length(m)
-    for j = 1:size(m)
-        result = [result m(i,j)];
+for i = 1:size(cent_mat)
+    for j = 1:length(cent_mat)
+        result = [result cent_mat(i,j)];
     end
 end
 
