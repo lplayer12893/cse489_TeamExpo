@@ -14,7 +14,7 @@ count = 0;
 
 for j = 1:size(centroid)
 	for k = 1:length(centroid)
-        if(centroid(j,k) >= (-1 * sensitivity) && centroid(j,k) <= (1 * sensitivity))    % If the centroid value is ambiguous
+        if(centroid(j,k) >= (-2 * sensitivity) && centroid(j,k) <= (1 * sensitivity))    % If the centroid value is ambiguous
             %r1 = rand(1);
             count = count + 1;
             %if(r1 >= 0.5)
@@ -23,7 +23,7 @@ for j = 1:size(centroid)
             %    centroid(j,k) = -1;
             %end 
             centroid(j,k) = 0;  % Ambiguous values will not be considered in the classification algorithm
-        elseif(centroid(j,k) > sensitivity) % if images have the same white value, it is white in the centroid
+        elseif(centroid(j,k) > 1 * sensitivity) % if images have the same white value, it is white in the centroid
 			centroid(j,k) = 1;
 		else
 			centroid(j,k) = -1;
