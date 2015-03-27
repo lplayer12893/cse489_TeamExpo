@@ -21,4 +21,4 @@ for i = 1:size(X)	% convert to binary bipolar matrix
 	end
 end
 
-A = rotateOptimal(X);
+A = rotateOptimal(XX;
