@@ -1,13 +1,13 @@
-function A = rotateOptimal(b) % finds the rotation according to the rotation reference
+function A = rotateOptimal(b,ref) % finds the rotation according to the rotation reference
 % b is the matrix to be tested or added to the centroid, and must be optimally rotated
+% ref is the rotation reference
 s = size(b);
-a = generateRotationReference(s(1),length(b));
 temp = b;
-min = hammingDist(a(:),b(:));
+min = hammingDist(ref(:),b(:));
 n = 0;
 for i = 0:35
     temp = imrotate(b,i*10,'bilinear','crop');
-    n = hammingDist(a(:),temp(:));
+    n = hammingDist(ref(:),temp(:));
     if(n < min)
         min = temp;
     end
