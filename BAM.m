@@ -1,7 +1,9 @@
 function [outX, outY] = BAM(inputX, inputY)
 
 	% Turn the input image into a 1D vector
-	inputX = reshape(inputX, [1, 786432]);
+	vectorDimension = size(inputX, 1) * size(inputX, 2);
+	originalDimension = size(inputX);
+	inputX = reshape(inputX, [1, vectorDimension]);
 
 	% Stored Vectors
     bear1 = createMatrix('project_photo\bear1.jpeg');
@@ -67,13 +69,21 @@ function [outX, outY] = BAM(inputX, inputY)
     whale7 = createMatrix('project_photo\whale7.jpg');
     whale8 = createMatrix('project_photo\whale8.jpg');
 
-    Xbear = reshape(generateCentroid(bear1, bear2, bear3, bear4, bear5, bear7, bear8), [1, 786432]);
-    Xelephant = reshape(generateCentroid(elephant1, elephant2, elephant3, elephant4, elephant5, elephant6, elephant7), [1, 786432]);
-    Xfighter = reshape(generateCentroid(fighter1, fighter2, fighter3, fighter4, fighter5, fighter6, fighter7), [1, 786432]);
-    Xpassenger = reshape(generateCentroid(passenger1, passenger2, passenger3, passenger4, passenger5, passenger6, passenger7), [1, 786432]);
-    Xship = reshape(generateCentroid(ship1, ship2, ship3, ship4, ship5, ship6, ship7), [1, 786432]);
-    Xsub = reshape(generateCentroid(sub1, sub2, sub3, sub4, sub5, sub6, sub7), [1, 786432]);
-    Xwhale = reshape(generateCentroid(whale1, whale2, whale3, whale4, whale5, whale6, whale7), [1, 786432]);
+    % Xbear = reshape(generateCentroid(bear1, bear2, bear3, bear4, bear5, bear7, bear8), [1, vectorDimension]);
+    % Xelephant = reshape(generateCentroid(elephant1, elephant2, elephant3, elephant4, elephant5, elephant6, elephant7), [1, vectorDimension]);
+    % Xfighter = reshape(generateCentroid(fighter1, fighter2, fighter3, fighter4, fighter5, fighter6, fighter7), [1, vectorDimension]);
+    % Xpassenger = reshape(generateCentroid(passenger1, passenger2, passenger3, passenger4, passenger5, passenger6, passenger7), [1, vectorDimension]);
+    % Xship = reshape(generateCentroid(ship1, ship2, ship3, ship4, ship5, ship6, ship7), [1, vectorDimension]);
+    % Xsub = reshape(generateCentroid(sub1, sub2, sub3, sub4, sub5, sub6, sub7), [1, vectorDimension]);
+    % Xwhale = reshape(generateCentroid(whale1, whale2, whale3, whale4, whale5, whale6, whale7), [1, vectorDimension]);
+
+    Xbear = reshape(bear1, [1, vectorDimension]);
+    Xelephant = reshape(elephant1, [1, vectorDimension]);
+    Xfighter = reshape(fighter1, [1, vectorDimension]);
+    Xpassenger = reshape(passenger1, [1, vectorDimension]);
+    Xship = reshape(ship1, [1, vectorDimension]);
+    Xsub = reshape(sub1, [1, vectorDimension]);
+    Xwhale = reshape(whale1, [1, vectorDimension]);
 
 	Ybear = 		[1 -1 -1 -1 -1 -1 -1];
 	Yelephant = 	[-1 1 -1 -1 -1 -1 -1];
@@ -113,44 +123,37 @@ function [outX, outY] = BAM(inputX, inputY)
 	end
 	
 	% Convert the 1D vector baack into the matrix representing the image
-	outX = reshape(actX, [768, 1024]);
+	outX = reshape(actX, originalDimension);
 	outY = actY;
 
-	imshow(outX);
+	% imshow(outX);
 
 end
 
 function out = Activation(input, filler)
 	out = input;
+	threshold = 0;
 
 	for i = 1:length(input)
-		if input(:,i) > 0
+		if input(:,i) > threshold
 			out(:,i) = 1;
-		elseif input(:,i) < 0
+		elseif input(:,i) < threshold
 			out(:,i) = -1;
-		elseif input(:,i) == 0
+		elseif input(:,i) == threshold
 			out(:,i) = filler(:,i);
 		end
 	end
 end
 
 function out = CalcWeight(x, y)
-	out = zeros(size(x,2), size(y,2));
+	
+	output = zeros(size(x,2), size(y,2));
 
 	% NOTE: we are assuming the number of rows in x is equal to the number of rows in y
 	for i = 1:size(x,1)
-		in1 = x(i,:);
-		in2 = y(i,:);
-
-		tempOut = zeros(length(in1), length(in2));
-
-		for i = 1:length(in1)
-			for j = 1:length(in2)
-				tempOut(i, j) = in1(i) * in2(j);
-			end
-		end
-
-		out = out + tempOut;
+		output = output + x(i,:).' * y(i,:);
 	end
+
+	out = output;
 
 end
