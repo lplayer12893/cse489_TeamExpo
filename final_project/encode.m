@@ -8,20 +8,23 @@ tmp = [];
 
 % Day 1 encoding defaults to wait
 pattern = [1,-1];
-for k = 1:length(m)
+s = size(m)
+for k = 1:s(2)
+    tmp = [];
     for p = 1:(conf(k)/2)
         tmp = [tmp pattern];
     end
     result = [result zeros([1,n-conf(k)]) tmp];
 end
 
-for i = 1:size(m)
-    for j = 1:length(m)
-        d1 = abs(m(1i+1,j)) - abs(m(1i,j));
-        d2 = abs(m(1i+2,j)) - abs(m(1i+1,j));
-        d3 = abs(m(1i+3,j)) - abs(m(1i+2,j));
+for i = 1:s(1)-3
+    tmp2 = [];
+    for j = 1:s(2)
+        d1 = abs(m(i+1,j)) - abs(m(i,j));
+        d2 = abs(m(i+2,j)) - abs(m(i+1,j));
+        d3 = abs(m(i+3,j)) - abs(m(i+2,j));
         
-        if(abs(d1) <= abs(m(1i,j)*0.01))  % if no change
+        if(abs(d1) <= abs(m(i,j)*0.01))  % if no change
             d1 = 0;
         elseif(d1 < 0)  % if negative change
             d1 = -1;
@@ -29,7 +32,7 @@ for i = 1:size(m)
             d1 = 1;
         end
         
-        if(abs(d2) <= abs(m(1i+1,j)*0.01))  % if no change
+        if(abs(d2) <= abs(m(i+1,j)*0.01))  % if no change
             d2 = 0;
         elseif(d2 < 0)  % if negative change
             d2 = -1;
@@ -37,7 +40,7 @@ for i = 1:size(m)
             d2 = 1;
         end
         
-        if(abs(d3) <= abs(m(1i+2,j)*0.01))  % if no change
+        if(abs(d3) <= abs(m(i+2,j)*0.01))  % if no change
             d3 = 0;
         elseif(d3 < 0)  % if negative change
             d3 = -1;
@@ -116,9 +119,34 @@ for i = 1:size(m)
         for p = 1:(conf(j)/2)
             tmp = [tmp pattern];
         end
-        result = [result zeros([1,n-conf(j)]) tmp];
+        tmp2 = [tmp2 zeros([1,n-conf(j)]) tmp];
 
     end
+    result = [result;tmp2];
 end
+
+% 2nd to last day encoding defaults to wait
+pattern = [1,-1];
+tmp2 = [];
+for k = 1:s(2)
+    tmp = [];
+    for p = 1:(conf(k)/2)
+        tmp = [tmp pattern];
+    end
+    tmp2 = [tmp2 zeros([1,n-conf(k)]) tmp];
+end
+result = [result;tmp2];
+
+% Last encoding defaults to wait
+pattern = [1,-1];
+tmp2 = [];
+for k = 1:s(2)
+    tmp = [];
+    for p = 1:(conf(k)/2)
+        tmp = [tmp pattern];
+    end
+    tmp2 = [tmp2 zeros([1,n-conf(k)]) tmp];
+end
+result = [result;tmp2];
 
 A = result;

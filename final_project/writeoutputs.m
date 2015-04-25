@@ -1,4 +1,4 @@
-function A = writeoutputs(m,t)
+function A = writeOutputs(m,t)
 
 
 csvwrite('output.csv', [m t]);
