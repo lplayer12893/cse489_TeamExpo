@@ -8,7 +8,7 @@ end
 disp('Creating Matrix');
 
 %reads the input file and it separtes the data and classification
-read = csvread(file, 1, 0);
+read = csvread(file, 1, 1);
 y = read(:,1:14);
 z= read(:,18:size(read,2));
 M = [y z];
