@@ -15,4 +15,10 @@ for i = 1:length(prefixes)
     correlations = [correlations;];
 end
 
-A = correlations;
+s = size(correlations);
+
+sumset = sum(correlations,1);
+sumset = sumset / s(2);
+sumset = round(sumset) * 2;
+
+A = sumset;
