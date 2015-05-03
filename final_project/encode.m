@@ -121,8 +121,7 @@ for i = 1:s(1)-3
                         tmp = [tmp pattern];
                     end
                     tmp2 = [tmp2 zeros([1,n-conf(j)]) tmp];
-
-                    result = [result;tmp2];
+                    
 		        end
                 pattern = [1,-1];
             case 1
