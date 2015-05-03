@@ -1,14 +1,17 @@
 function [M, A] = getEncodedData(n) % n is the number of bits per parameter
 
 prefixes = {'AAPL','AHS','AMD','FCX','FDX','HAL','LUV','MS','SGY','TSLA'};
-suffix = '_Data';
+suffix = '_Data.csv';
 M = [];
 A = [];
+
 for i = 1:length(prefixes)
-    [m,a] = readInputs([prefixes(i) suffix]);
+
+    file = [[pwd '/Data/' prefixes{i}] suffix];
+    [m,a] = readInputs(file);
 
     corrs = loadCorrelations(n);
 
-    M = [M encode(m,n,corrs(i));];
+    M = [M encode(m,n,corrs);];
     A = [A a;];
 end

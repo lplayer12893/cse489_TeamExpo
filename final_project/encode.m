@@ -92,26 +92,34 @@ for i = 1:s(1)-3
                         end 
                 end  
             case 0
+                disp('heyo');
 		        if(undecided(1))
+                    disp('here');
 			        d0 = undecided(2);
 
                     switch d0
                         case -1
                             switch d3
                                 case -1
+                                    undecided(1) = false;
                                     pattern = [1,-1];
                                 case 0
                                     undecided(1) = true;
+                                    pattern = [1,-1];
                                 case 1
+                                    undecided(1) = false;
                                     pattern = [-1,-1];
                             end
                         case 1
                             switch d3
                                 case -1
+                                    undecided(1) = false;
                                     pattern = [1,1];
                                 case 0
                                     undecided(1) = true;
+                                    pattern = [1,-1];
                                 case 1
+                                    undecided(1) = false;
                                     pattern = [1,-1]
                             end
                     end
@@ -175,18 +183,22 @@ for i = 1:s(1)-3
 
     end
     if(~undecided(1))
+        size_result = size(result)
+        size_tmp2 = size(tmp2)
         result = [result;tmp2];
     end
 end
 
 if(undecided(1))    % if 3rd to last day was undecided, defaults to wait
     pattern = [-1,1];
-
-    tmp = [];
-    for p = 1:(conf(j)/2)
-        tmp = [tmp pattern];
+    tmp2 = [];
+    for k = 1:s(2)
+        tmp = [];
+        for p = 1:(conf(j)/2)
+            tmp = [tmp pattern];
+        end
+        tmp2 = [tmp2 zeros([1,n-conf(j)]) tmp];
     end
-    tmp2 = [tmp2 zeros([1,n-conf(j)]) tmp];
 
     result = [result;tmp2];
 end
