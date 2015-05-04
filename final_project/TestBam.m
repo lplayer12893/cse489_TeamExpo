@@ -2,10 +2,10 @@ function A = TestBam()
 	tickers = {'AAPL','AHS','AMD','FCX','FDX','HAL','LUV','MS','SGY','TSLA'};
 	bitsPerParam = 10;
 
-	for index = 1:2
+	for index = 1:length(tickers)
 		% Encode the data
-		[originalData, originalClassification] = readInputs(strcat('Data/', tickers{7}, '_Data.csv'));
-		[encodedData, encodedClassification] = getEncodedData(bitsPerParam);
+		[originalData, originalClassification] = readInputs(strcat('Data/', tickers{index}, '_Data.csv'));
+		[encodedData, encodedClassification] = readEncodedData(strcat(tickers{index}, '_EncodedData.csv'));
 		cent = generateCentroid(encodedData, encodedClassification, loadCorrelations(bitsPerParam));
 
 		buyClass =     [1 1 1];
@@ -19,7 +19,7 @@ function A = TestBam()
 			buyCent = cent(1, :);
 			holdCent = cent(2, :);
 			sellCent = cent(3, :);
-			results = zeros(length(originalData), 5); % 5 rows for classification, open, high, low, and close
+			results = zeros(length(originalData), 5); % 5 rows for: classification, open, high, low, and close
 
 			[outX, outY] = BAM(inputData, zeros(1, 3), buyCent, sellCent, holdCent);
 
