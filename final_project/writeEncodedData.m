@@ -15,16 +15,15 @@ for i = 1:s(2)
 end
 
 % generalize conf for centroids
-conf = loadCorrelations(10);
 
-M = cell(size(prefixes));
-A = cell(size(prefixes));
+%M = cell(size(prefixes));
+%A = cell(size(prefixes));
 
-for k = 1:size(prefixes)
-    [m,a] = readEncodedData([prefixes{k} suffix]);
-    M{k} = m;
-    A{k} = a;
-end
+%for k = 1:size(prefixes)
+%    [m,a] = readEncodedData([prefixes{k} suffix]);
+%    M{k} = m;
+%    A{k} = a;
+%end
 
 for j = 1:size(cprefixes)
     c = generateCentroid(M,A,conf);
