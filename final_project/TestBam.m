@@ -6,23 +6,22 @@ function A = TestBam()
 		% Encode the data
 		[originalData, originalClassification] = readInputs(strcat('Data/', tickers{7}, '_Data.csv'));
 		[encodedData, encodedClassification] = getEncodedData(bitsPerParam);
+		cent = generateCentroid(encodedData, encodedClassification, loadCorrelations(bitsPerParam));
 
 		buyClass =     [1 1 1];
 		sellClass =    [-1 -1 -1];
 		holdClass =    [1 -1 1];
 
-		for i = 1:size()
+		for i = 1:size(encodedData, 1)
 			% Pass a row of data to BAM
 			inputData = encodedData(i,:);
-			classification = zeros(1, 3);
 
-			cent = generateCentroid(encodedData, encodedClassification, loadCorrelations(bitsPerParam));
-			buyCent = cent(1);
-			holdCent = cent(2);
-			sellCent = cent(3);
+			buyCent = cent(1, :);
+			holdCent = cent(2, :);
+			sellCent = cent(3, :);
 			results = zeros(length(originalData), 5); % 5 rows for classification, open, high, low, and close
 
-			[outX, outY] = BAM(inputData, classification, buyCent, sellCent, holdCent);
+			[outX, outY] = BAM(inputData, zeros(1, 3), buyCent, sellCent, holdCent);
 
 			if isequal(outY, buyClass)
 				results(i, 1) = -1;
