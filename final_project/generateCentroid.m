@@ -37,7 +37,7 @@ end
 
  % number of stock
 for j = 1:s(1)
-    sumset{longa(j)+2}) = sumset{longa(j)+2} + longm(:,j);
+    sumset{longa(j)+2} = sumset{longa(j)+2} + longm(:,j);
 end
 
 for k = 1:3

@@ -8,7 +8,7 @@ csuffix = '_Centroid';
 
 [M,A,conf] = getEncodedData(10);
 
-s = size(M)
+s = size(M);
 
 for i = 1:s(2)
     writeOutputs(M{i},A{i},[prefixes{i} suffix]);
@@ -22,4 +22,4 @@ for j = 1:s2(2)
     csvwrite([cprefixes{j} csuffix], c(i,:));
 end
 
-A = result;
+A = 0;
