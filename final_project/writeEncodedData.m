@@ -6,13 +6,13 @@ suffix = '_EncodedData.csv';
 cprefixes = {'Buy','Wait','Sell'};
 csuffix = '_Centroid';
 
-%[M,A,conf] = getEncodedData(10);
+[M,A,conf] = getEncodedData(10);
 
-%s = size(M);
+s = size(M);
 
-%for i = 1:s(2)
-%    writeOutputs(M{i},A{i},[prefixes{i} suffix]);
-%end
+for i = 1:s(2)
+    writeOutputs(M{i},A{i},[prefixes{i} suffix]);
+end
 
 % generalize conf for centroids
 conf = loadCorrelations(10);
