@@ -20,9 +20,9 @@ function A = TestBam()
 			buyCent = cent(1);
 			holdCent = cent(2);
 			sellCent = cent(3);
-			results = zeros(length(encodedData), 5); % 5 rows for classification, open, high, low, and close
+			results = zeros(length(originalData), 5); % 5 rows for classification, open, high, low, and close
 
-			[outX, outY] = BAM(inputData, Classification, buyCent, sellCent, holdCent);
+			[outX, outY] = BAM(inputData, classification, buyCent, sellCent, holdCent);
 
 			if isequal(outY, buyClass)
 				results(i, 1) = -1;
@@ -34,6 +34,44 @@ function A = TestBam()
 				results(i, 1) = 0;
 			end
 
+			% Check accuracy with first encoding
+			correctCount = 0;
+			if isequal(outY, buyClass) and originalClassification(i, 1) == -1
+				correctCount += 1;
+			elseif isequal(outY, sellClass) and originalClassification(i, 1) == 1
+				correctCount += 1;
+			elseif isequal(outY, holdClass) and originalClassification(i, 1) == 0
+				correctCount += 1
+			end
+
+			accuracy1 = correctCount / length(originalClassification);
+
+			% Check accuracy with second encoding
+			correctCount = 0;
+			if isequal(outY, buyClass) and originalClassification(i, 2) == -1
+				correctCount += 1;
+			elseif isequal(outY, sellClass) and originalClassification(i, 2) == 1
+				correctCount += 1;
+			elseif isequal(outY, holdClass) and originalClassification(i, 2) == 0
+				correctCount += 1
+			end
+
+			accuracy2 = correctCount / length(originalClassification);
+
+			% Check accuracy with third encoding
+			correctCount = 0;
+			if isequal(outY, buyClass) and originalClassification(i, 3) == -1
+				correctCount += 1;
+			elseif isequal(outY, sellClass) and originalClassification(i, 3) == 1
+				correctCount += 1;
+			elseif isequal(outY, holdClass) and originalClassification(i, 3) == 0
+				correctCount += 1
+			end
+
+			accuracy3 = correctCount / length(originalClassification);
+
+
+			% Compile results in a matrix to be written to file for analysis
 			results(i, 2) = originalData(i, 32);
 			results(i, 3) = originalData(i, 17);
 			results(i, 4) = originalData(i, 20);
