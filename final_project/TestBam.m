@@ -1,12 +1,11 @@
 function A = TestBam()
 	tickers = {'AAPL','AHS','AMD','FCX','FDX','HAL','LUV','MS','SGY','TSLA'};
-	numberofBits = 54;
 	bitsPerParam = 10;
 
-	for index = 1:1
+	for index = 1:2
 		% Encode the data
-		[originalData, originalClassification] = readInputs(strcat('Data/', tickers{index}, '_Data.csv'));
-		[encodedData, encodedClassification] = getEncodedData(numberOfBits);
+		[originalData, originalClassification] = readInputs(strcat('Data/', tickers{7}, '_Data.csv'));
+		[encodedData, encodedClassification] = getEncodedData(bitsPerParam);
 
 		buyClass =     [1 1 1];
 		sellClass =    [-1 -1 -1];
