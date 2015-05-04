@@ -5,7 +5,6 @@ function A = encode(m,n,conf)
 
 result = [];
 tmp = [];
-undecided = [false,0];
 
 % Day 1 encoding defaults to wait
 pattern = [1,-1];
@@ -58,79 +57,31 @@ for i = 1:s(1)-3
                         switch d3
                             case -1
                                 pattern = [1,-1];
-                                undecided(1) = false;
                             case 0
                                 pattern = [1,-1];
-                                undecided(1) = false;
                             case 1
                                 pattern = [1,-1];
-                                undecided(1) = false;
                         end 
                     case 0
                         switch d3
                             case -1
                                 pattern = [1,-1];
-                                undecided(1) = false;
                             case 0
-                                undecided(1) = true;
-                                undecided(2) = d1;
+                                pattern = [-1,1];
                             case 1
                                 pattern = [-1,-1];
-                                undecided(1) = false;
                         end 
                     case 1
                         switch d3
                             case -1
                                 pattern = [-1,-1];
-                                undecided(1) = false;
                             case 0
                                 pattern = [-1,-1];
-                                undecided(1) = false;
                             case 1
                                 pattern = [-1,-1];
-                                undecided(1) = false;
                         end 
                 end  
             case 0
-                disp('heyo');
-		        if(undecided(1))
-                    disp('here');
-			        d0 = undecided(2);
-
-                    switch d0
-                        case -1
-                            switch d3
-                                case -1
-                                    undecided(1) = false;
-                                    pattern = [1,-1];
-                                case 0
-                                    undecided(1) = true;
-                                    pattern = [1,-1];
-                                case 1
-                                    undecided(1) = false;
-                                    pattern = [-1,-1];
-                            end
-                        case 1
-                            switch d3
-                                case -1
-                                    undecided(1) = false;
-                                    pattern = [1,1];
-                                case 0
-                                    undecided(1) = true;
-                                    pattern = [1,-1];
-                                case 1
-                                    undecided(1) = false;
-                                    pattern = [1,-1]
-                            end
-                    end
-
-                    tmp = [];
-                    for p = 1:(conf(j)/2)
-                        tmp = [tmp pattern];
-                    end
-                    tmp2 = [tmp2 zeros([1,n-conf(j)]) tmp];
-                    
-		        end
                 pattern = [1,-1];
             case 1
                 switch d2
@@ -138,71 +89,42 @@ for i = 1:s(1)-3
                         switch d3
                             case -1
                                 pattern = [1,1];
-                                undecided(1) = false;
                             case 0
                                 pattern = [1,1];
-                                undecided(1) = false;
                             case 1
                                 pattern = [1,1];
-                                undecided(1) = false;
                         end 
                     case 0
                         switch d3
                             case -1
                                 pattern = [1,1];
-                                undecided(1) = false;
                             case 0
-                                undecided(1) = true;
-                                undecided(2) = d1;
+                                pattern = [-1,1];
                             case 1
                                 pattern = [1,-1];
-                                undecided(1) = false;
                         end 
                     case 1
                         switch d3
                             case -1
                                 pattern = [1,-1];
-                                undecided(1) = false;
                             case 0
                                 pattern = [1,-1];
-                                undecided(1) = false;
                             case 1
                                 pattern = [1,-1];
-                                undecided(1) = false;
                         end
                 end 
         end
         
-        if(~undecided(1))
-            tmp = [];
-            for p = 1:(conf(j)/2)
-                tmp = [tmp pattern];
-            end
-            tmp2 = [tmp2 zeros([1,n-conf(j)]) tmp];
-        end
-
-    end
-    if(~undecided(1))
-        size_result = size(result)
-        size_tmp2 = size(tmp2)
-        result = [result;tmp2];
-    end
-end
-
-if(undecided(1))    % if 3rd to last day was undecided, defaults to wait
-    pattern = [-1,1];
-    tmp2 = [];
-    for k = 1:s(2)
         tmp = [];
         for p = 1:(conf(j)/2)
             tmp = [tmp pattern];
         end
         tmp2 = [tmp2 zeros([1,n-conf(j)]) tmp];
     end
-
+    
     result = [result;tmp2];
+    
 end
-
 
 % 2nd to last day encoding defaults to wait
 pattern = [1,-1];

@@ -10,9 +10,12 @@ for i = 1:length(prefixes)
     fileD = [[pwd '/Data/' prefixes{i}] suffixes{1}];
     fileI = [[pwd '/Data/' prefixes{i}] suffixes{2}];
     
-    correlations = [correlations max(readConf(n,fileD),readConf(n,fileI))];
-    
-    correlations = [correlations;];
+    if(i == 1)
+        correlations = [max(readConf(n,fileD),readConf(n,fileI))];
+    else
+        correlations = [correlations; max(readConf(n,fileD),readConf(n,fileI))];
+    end    
+
 end
 
 s = size(correlations);
