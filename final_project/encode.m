@@ -8,7 +8,7 @@ tmp = [];
 
 % Day 1 encoding defaults to wait
 pattern = [1,-1];
-s = size(m)
+s = size(m);
 for k = 1:s(2)
     tmp = [];
     for p = 1:(conf(k)/2)

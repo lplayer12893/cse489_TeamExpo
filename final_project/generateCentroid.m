@@ -1,8 +1,8 @@
-function R = generateCentroid(M,A,conf) % M is a set of encoded matrices. The 3rd dimension indicates different stocks
+function R = generateCentroid(M,A,conf,n) % M is a set of encoded matrices. The 3rd dimension indicates different stocks
                                         % A is the set of classification matrices
                                         % conf is the correlation vector
 s = size(conf);
-centroids = [];
+centroids = cell([1,3]);
 tmp = [];
 tmp2 = [];
 
@@ -35,14 +35,16 @@ for k = 1:10
     longm = [longm; m];
 end
 
+s = size(longm);
+
  % number of stock
 for j = 1:s(1)
-    sumset{longa(j)+2} = sumset{longa(j)+2} + longm(:,j);
+    sumset{longa(j)+2} = sumset{longa(j)+2} + longm(j,:);
 end
-
+i = 1;
 for k = 1:3
     tmp2 = [];
-    for i = 1:s(2):10
+    while i < s(2)
         t = sumset{k};
         test1 = t(1,i+8);
         test2 = t(1,i+9);
@@ -65,8 +67,9 @@ for k = 1:3
             tmp = [tmp pattern];
         end
         tmp2 = [tmp2 zeros([1,n-conf(k)]) tmp];
+        i = i+10;
     end
-    centroid = [centroid;tmp2];
+    centroids{k} = tmp2;
 end
 
-R = centroid;
+R = centroids;
