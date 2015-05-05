@@ -1,14 +1,6 @@
-% a= test();
-% newa1= b(:);
-% aweight = newa1*newa1.';
-% 
-% tic;
-% 
-% data = testhop(newa1, aweight);
-% toc
-% % data= testhop(newwb8, animalweight);
-% vesi=length(data);
 
+
+%reads the data from individual stock files 
 aapl = csvread('AAPL_EncodedData.csv');
 ahs = csvread('AHS_EncodedData.csv');
 amd = csvread('AMD_EncodedData.csv');
@@ -39,8 +31,11 @@ newwait = wait(:);
 % end
 
 
+%creates the weight matrix from the centroids
 cenweight = newbuy*newbuy.' + newsell*newsell.' + newwait*newwait.'; 
 
+%runs the hopfield network, test its accurcy and calculate the running
+%time.
 tic; 
 data = hopfield(newa3, cenweight);
 toc
@@ -50,7 +45,7 @@ Accrate1= ((vesi - hamd)/vesi)
 
 
 
-% 
+% LVQ Test Data set
 % x=[newbuy, newsell, newwait];
 % t= [1 0 0; 0 2 0; 0 0 3];
 % y= neulvq(x,t);
