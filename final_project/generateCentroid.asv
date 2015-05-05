@@ -41,6 +41,8 @@ s = size(longm)
 for j = 1:s(1)
     sumset{longa(j)+2} = sumset{longa(j)+2} + longm(j,:);
 end
+
+    sumset{1}
     
 for k = 1:3
     tmp2 = [];
