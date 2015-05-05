@@ -1,0 +1,27 @@
+function A = hammingMain()
+% input is the vector to be classified
+% training is the matrix containing the centroids for all the stored objects
+% classes is the vector containing the classifications corresponding to the training matrix
+
+M = cell(size(prefixes));
+A = cell(size(prefixes));
+
+for k = 1:10
+    [m,a] = readEncodedData([prefixes{k} suffix]);
+    M{k} = m;
+    A{k} = a;
+end
+
+buy = csvread([pwd 'Data/], 0, 0);
+training = [centroidToVector(ships).' centroidToVector(subs).' centroidToVector(whales).'];
+count = 0;
+
+s = size(M{1});
+
+for k = 1:size(M)
+    for i = 1:s(2)
+        n = MaxNet(hammingNet(input4,training))
+    end
+end
+
+A = count / 64920;

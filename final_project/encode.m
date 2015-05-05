@@ -58,7 +58,7 @@ for i = 1:s(1)-3
                             case -1
                                 pattern = [1,-1];
                             case 0
-                                pattern = [1,-1];
+                                pattern = [-1,-1];
                             case 1
                                 pattern = [1,-1];
                         end 
@@ -67,7 +67,7 @@ for i = 1:s(1)-3
                             case -1
                                 pattern = [1,-1];
                             case 0
-                                pattern = [-1,1];
+                                pattern = [-1,-1];
                             case 1
                                 pattern = [-1,-1];
                         end 
@@ -99,7 +99,7 @@ for i = 1:s(1)-3
                             case -1
                                 pattern = [1,1];
                             case 0
-                                pattern = [-1,1];
+                                pattern = [1,1];
                             case 1
                                 pattern = [1,-1];
                         end 
@@ -108,7 +108,7 @@ for i = 1:s(1)-3
                             case -1
                                 pattern = [1,-1];
                             case 0
-                                pattern = [1,-1];
+                                pattern = [1,1];
                             case 1
                                 pattern = [1,-1];
                         end

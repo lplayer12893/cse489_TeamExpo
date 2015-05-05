@@ -8,25 +8,25 @@ csuffix = '_Centroid.csv';
 
 n = 26;
 
-%[M,A,conf] = getEncodedData(n);
+[M,A,conf] = getEncodedData(n);
 
-%s = size(M);
+s = size(M);
 
-%for i = 1:s(2)
-%    writeOutputs(M{i},A{i},[prefixes{i} suffix]);
-%end
+for i = 1:s(2)
+    writeOutputs(M{i},A{i},[prefixes{i} suffix]);
+end
 
 % generalize conf for centroids
-conf = loadCorrelations(n);
+%conf = loadCorrelations(n);
 
-M = cell(size(prefixes));
-A = cell(size(prefixes));
+%M = cell(size(prefixes));
+%A = cell(size(prefixes));
 
-for k = 1:10
-    [m,a] = readEncodedData([prefixes{k} suffix]);
-    M{k} = m;
-    A{k} = a;
-end
+%for k = 1:10
+%    [m,a] = readEncodedData([prefixes{k} suffix]);
+%    M{k} = m;
+%    A{k} = a;
+%end
 
 [b,w,e] = generateCentroid(M,A,conf,n)
 
