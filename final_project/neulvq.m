@@ -1,9 +1,6 @@
 function [ y ] = neulvq( input, centroid )
-%NEULVQ Summary of this function goes here
-<<<<<<< HEAD
-=======
-% where centroid is classification for input vectors
->>>>>>> origin/master
+%NEULVQ Summary of this function goes here<<<<<<< HEAD =======
+% where centroid is classification for input vectors>>>>>>> origin/master
 %   Detailed explanation goes here
 % uses the similar code from lab 2.
 net = lvqnet(10);
