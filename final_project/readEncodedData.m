@@ -9,5 +9,6 @@ disp('Creating Matrix');
 
 %reads the input file and it separates the data and classification
 read = csvread(file, 0, 0);
-M = read(:,1:520);
-A = read(:,521:523);
+s = size(read);
+M = read(:,1:s(2)-3);
+A = read(:,s(2)-2:s(2));

@@ -6,16 +6,18 @@ suffix = '_EncodedData.csv';
 cprefixes = {'Buy','Wait','Sell'};
 csuffix = '_Centroid.csv';
 
-%[M,A,conf] = getEncodedData(10);
-%
+n = 26;
+
+%[M,A,conf] = getEncodedData(n);
+
 %s = size(M);
-%
+
 %for i = 1:s(2)
 %    writeOutputs(M{i},A{i},[prefixes{i} suffix]);
 %end
 
 % generalize conf for centroids
-conf = loadCorrelations(10);
+conf = loadCorrelations(n);
 
 M = cell(size(prefixes));
 A = cell(size(prefixes));
@@ -26,12 +28,10 @@ for k = 1:10
     A{k} = a;
 end
 
-cent = generateCentroid(M,A,conf,10);
-size(cent)
+[b,w,e] = generateCentroid(M,A,conf,n)
 
-for j = 1:3
-    c  = cent{j};
-    csvwrite([cprefixes{j} csuffix], c);
-end
+csvwrite([cprefixes{1} csuffix], b);
+csvwrite([cprefixes{2} csuffix], w);
+csvwrite([cprefixes{3} csuffix], e);
 
 A = 0;
