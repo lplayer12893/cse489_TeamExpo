@@ -60,7 +60,7 @@ for i = 1:s(1)-3
                             case 0
                                 pattern = [-1,-1];
                             case 1
-                                pattern = [1,-1];
+                                pattern = [-1,-1];
                         end 
                     case 0
                         switch d3
@@ -76,13 +76,34 @@ for i = 1:s(1)-3
                             case -1
                                 pattern = [-1,-1];
                             case 0
-                                pattern = [-1,-1];
+                                pattern = [1,1];
                             case 1
                                 pattern = [-1,-1];
                         end 
                 end  
             case 0
-                pattern = [1,-1];
+                switch d2
+                    case -1
+                        switch d3
+                            case -1
+                                pattern = [1,-1];
+                            case 0
+                                pattern = [-1,-1];
+                            case 1
+                                pattern = [-1,-1];
+                        end 
+                    case 0
+                        pattern = [1,-1];
+                    case 1
+                        switch d3
+                            case -1
+                                pattern = [1,1];
+                            case 0
+                                pattern = [1,1];
+                            case 1
+                                pattern = [-1,-1];
+                        end 
+                end
             case 1
                 switch d2
                     case -1
@@ -90,7 +111,7 @@ for i = 1:s(1)-3
                             case -1
                                 pattern = [1,1];
                             case 0
-                                pattern = [1,1];
+                                pattern = [-1,-1];
                             case 1
                                 pattern = [1,1];
                         end 
@@ -106,7 +127,7 @@ for i = 1:s(1)-3
                     case 1
                         switch d3
                             case -1
-                                pattern = [1,-1];
+                                pattern = [1,1];
                             case 0
                                 pattern = [1,1];
                             case 1

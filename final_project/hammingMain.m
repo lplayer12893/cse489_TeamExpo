@@ -3,13 +3,16 @@ function A = hammingMain()
 % training is the matrix containing the centroids for all the stored objects
 % classes is the vector containing the classifications corresponding to the training matrix
 
+prefixes = {'AAPL','AHS','AMD','FCX','FDX','HAL','LUV','MS','SGY','TSLA'};
+suffix = '_EncodedData.csv';
+
 M = cell(size(prefixes));
 A = cell(size(prefixes));
 
 for k = 1:10
-    [m,a] = readEncodedData([prefixes{k} suffix]);
-    M{k} = m;
-    A{k} = a;
+    [z,f] = readEncodedData([prefixes{k} suffix]);
+    M{k} = z;
+    A{k} = f;
 end
 
 buy = csvread([pwd 'Buy_Centroid.csv'], 0, 0);
